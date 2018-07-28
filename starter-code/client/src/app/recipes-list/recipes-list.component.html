@@ -1,0 +1,8 @@
+<h2>List of dishes</h2>
+
+<div class="dishes-main-container" *ngFor="let d of dishesList">
+  <div class="dish-card" >
+    <h4>{{d.name}}</h4>
+    <img src="{{d.image}}" alt="">
+  </div>
+</div>
