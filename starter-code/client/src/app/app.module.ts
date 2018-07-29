@@ -6,16 +6,21 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { dishesService } from './services/dishes.service';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
+import { RouterModule, Routes } from '@angular/router';
+import { routes } from './routes/recipe.router';
+import { DishDetailsComponent } from './dish-details/dish-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipesListComponent,
+    DishDetailsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [dishesService],
   bootstrap: [AppComponent]

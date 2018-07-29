@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 export class dishesService {
 
   beServer: string = environment.BASEURL;
+  id:string;
 
   constructor(private http: Http) { }
 
@@ -15,4 +16,10 @@ export class dishesService {
     return this.http.get(`${this.beServer}/api/dishes`)
       .map((res) => res.json());
   }
+
+  getSingleDish(id) {
+    return this.http.get(`${this.beServer}/api/dishes/${id}`)
+      .map((res) => res.json());
+  }
+
 }
