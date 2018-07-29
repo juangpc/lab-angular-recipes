@@ -21,7 +21,7 @@ export class RecipesListComponent implements OnInit {
   retrieveAllDishes() {
     this.dservice.getAllDishes()
       .subscribe((list) => {
-        console.log(list);
+        // console.log(list);
         this.dishesList = list;
       });
   }

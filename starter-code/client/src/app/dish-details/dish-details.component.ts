@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { dishesService } from '../services/dishes.service';
 import { ActivatedRoute } from '@angular/router';
+import { dishesService } from '../services/dishes.service';
 import { dish } from '../interfaces/dish.interface';
+import { ingredient } from '../interfaces/ingredient.interface';
 
 @Component({
   selector: 'app-dish-details',
@@ -11,24 +12,38 @@ import { dish } from '../interfaces/dish.interface';
 
 export class DishDetailsComponent implements OnInit {
 
-  id:string='';
-  dish:dish;
+  id: string;
+  dish: dish;
+  ingredientsList: Array<ingredient> = [];
 
   constructor(private dservice: dishesService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
-      .subscribe((params) => this.id = params['id']);
+      .subscribe(params => this.id = params['id']);
     this.getDishDetails(this.id);
+    this.populatePossibleIngredientsList();
   }
 
   getDishDetails(id) {
     this.dservice.getSingleDish(id)
-      .subscribe((dish) => {
-        console.log(dish);
+      .subscribe(dish => {
+        // console.log(dish);
         this.dish = dish;
       });
   }
 
+  populatePossibleIngredientsList() {
+    this.dservice.getingredientsList()
+      .subscribe(ingredients => {
+        this.ingredientsList = ingredients;
+      })
+  }
+
+  addIngredient(newIngredient) {
+    newIngredient['dishId'] = this.id;
+    this.dservice.addIngredientToDish(newIngredient)
+      .subscribe(err => console.log(err));
+  }
 }

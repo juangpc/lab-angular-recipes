@@ -1,7 +1,22 @@
 <a [routerLink]="['']">Home</a>
-<h2>Details the dish</h2>
+<h2>Dish details</h2>
 <div class="dish-container">
   <h4>{{dish?.name}}</h4>
   <img src="{{dish?.image}}" alt="">
   <p>{{dish?.description}}</p>
+  <h5>Ingredients</h5>
+</div>
+<div class="possible-ingredients-list">
+  <table>
+      <tr>
+        <th>Possible Ingredient</th>
+        <th>Quantity</th>
+        <th> </th>
+      </tr>
+    <tr *ngFor="let i of ingredientsList"
+    app-ingredient-item
+    [ingredient]="i"
+    (onAddIngredient)="addIngredient($event)">
+    </tr>
+  </table>
 </div>
